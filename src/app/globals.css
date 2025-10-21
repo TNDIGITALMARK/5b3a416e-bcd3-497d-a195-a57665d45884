@@ -1,48 +1,74 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* AI Disaster Alert System - Design System
+   Pixel-perfect replication of government-grade disaster alert interface
+   All colors in HSL format for theme compatibility
 */
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+  /* Core Background & Foreground */
+  --background: 210 40% 98%;
+  --foreground: 216 13% 20%;
 
+  /* Card System */
   --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
+  --card-foreground: 216 13% 20%;
 
+  /* Popover System */
   --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
+  --popover-foreground: 216 13% 20%;
 
-  --primary: 222.2 47.4% 11.2%;
-  --primary-foreground: 210 40% 98%;
+  /* Primary (Navy Blue Header) - #2C5282 */
+  --primary: 211 49% 34%;
+  --primary-foreground: 0 0% 100%;
 
+  /* Secondary (Light Background) */
   --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
+  --secondary-foreground: 216 13% 20%;
 
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
+  /* Muted (Borders & Subtle Elements) */
+  --muted: 214 32% 91%;
+  --muted-foreground: 215 16% 47%;
 
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
+  /* Accent (Interactive Elements) */
+  --accent: 211 49% 34%;
+  --accent-foreground: 0 0% 100%;
 
+  /* Disaster Alert Colors */
+  /* Safe Green - #28a745 / #48BB78 */
+  --safe: 142 71% 45%;
+  --safe-foreground: 0 0% 100%;
+
+  /* Alert Orange - #fd7e14 / #ED8936 */
+  --alert: 27 98% 54%;
+  --alert-foreground: 0 0% 100%;
+
+  /* Danger Red - #dc3545 / #E53E3E */
+  --danger: 354 70% 54%;
+  --danger-foreground: 0 0% 100%;
+
+  /* Destructive (Error States) */
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
 
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 222.2 84% 4.9%;
+  /* Borders & Inputs */
+  --border: 214 32% 85%;
+  --input: 214 32% 91.4%;
+  --ring: 211 49% 34%;
 
-  --radius: 0.5rem;
+  /* Border Radius */
+  --radius: 0.375rem;
 
+  /* Sidebar (if needed) */
   --sidebar-background: 0 0% 98%;
   --sidebar-foreground: 240 5.3% 26.1%;
-  --sidebar-primary: 240 5.9% 10%;
+  --sidebar-primary: 211 49% 34%;
   --sidebar-primary-foreground: 0 0% 98%;
   --sidebar-accent: 240 4.8% 95.9%;
   --sidebar-accent-foreground: 240 5.9% 10%;
   --sidebar-border: 220 13% 91%;
-  --sidebar-ring: 217.2 91.2% 59.8%;
+  --sidebar-ring: 211 49% 34%;
 }
 
 .dark {
@@ -153,11 +179,129 @@ All colors MUST be HSL.
   }
 }
 
+/* Global Resets & Base Styles */
 * {
   border-color: hsl(var(--border));
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.25;
+  color: hsl(var(--foreground));
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.875rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+h4 {
+  font-size: 1.125rem;
+  margin-bottom: 0.625rem;
+}
+
+h5, h6 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+}
+
+a {
+  color: hsl(var(--primary));
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: hsl(var(--accent));
+  text-decoration: underline;
+}
+
+/* Button Reset */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Input Reset */
+input, select, textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 0.5rem 0.75rem;
+  background-color: hsl(var(--card));
+  color: hsl(var(--foreground));
+  transition: border-color 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.1);
+}
+
+/* Utility Classes for Disaster Alerts */
+.alert-safe {
+  background-color: hsl(var(--safe));
+  color: hsl(var(--safe-foreground));
+}
+
+.alert-warning {
+  background-color: hsl(var(--alert));
+  color: hsl(var(--alert-foreground));
+}
+
+.alert-danger {
+  background-color: hsl(var(--danger));
+  color: hsl(var(--danger-foreground));
+}
+
+.text-safe {
+  color: hsl(var(--safe));
+}
+
+.text-warning {
+  color: hsl(var(--alert));
+}
+
+.text-danger {
+  color: hsl(var(--danger));
 }
